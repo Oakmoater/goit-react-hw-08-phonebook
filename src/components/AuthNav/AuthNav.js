@@ -1,15 +1,19 @@
-import { NavLink } from 'react-router-dom';
-// import css from './AuthNav.module.css';
+import { AuthNavContainer, NavLinkStyled } from './AuthNav.styled';
+export const AuthNav = ({ closeMenu }) => {
+  const handleClick = () => {
+    if (closeMenu) {
+      closeMenu();
+    }
+  };
 
-export const AuthNav = () => {
   return (
-    <div>
-      <NavLink className={css.link} to="/register">
+    <AuthNavContainer flex gap={'1rem'}>
+      <NavLinkStyled to="/login" onClick={handleClick}>
+        Log in
+      </NavLinkStyled>
+      <NavLinkStyled to="/register" onClick={handleClick}>
         Register
-      </NavLink>
-      <NavLink className={css.link} to="/login">
-        Log In
-      </NavLink>
-    </div>
+      </NavLinkStyled>
+    </AuthNavContainer>
   );
 };

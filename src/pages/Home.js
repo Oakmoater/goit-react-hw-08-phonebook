@@ -1,26 +1,38 @@
-const styles = {
-  container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
+import { LinkStyled } from 'components/UI/Links';
+import { Text } from 'components/UI/Paragraphs';
+import { Title } from 'components/UI/Title.styles';
+import { useAuth } from 'hooks/useAuth';
+import React from 'react';
+
+const HomePage = () => {
+  const { isLoggedIn } = useAuth();
+
+  const getContent = () => {
+    if (!isLoggedIn) {
+      return (
+        <>
+          <Text>
+            <LinkStyled to="/login">Sign in </LinkStyled> to your account to
+            synchronize your contacts.
+          </Text>
+          <Text>
+            If you still do not have an account, please{' '}
+            <LinkStyled to="/register">register</LinkStyled>.
+          </Text>
+        </>
+      );
+    }
+  };
+
+  const content = getContent();
+  return (
+    <>
+      <Title left>
+        Welcome to our introductory app for storing your contacts
+      </Title>
+      {content}
+    </>
+  );
 };
 
-export default function Home() {
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>
-        Task manager welcome page{' '}
-        <span role="img" aria-label="Greeting icon">
-          💁‍♀️
-        </span>
-      </h1>
-    </div>
-  );
-}
+export default HomePage;
